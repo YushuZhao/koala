@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=development node script/dev.js",
+    "start": "cross-env NODE_ENV=development webpack-dev-server --config webpack/webpack.dev.js",
     "build": "cross-env NODE_ENV=production node script/build.js",
     "lint": "eslint src",
     "format": "prettier --write .",
@@ -39,7 +39,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-config-react-important-stuff": "^3.0.0",
     "eslint-plugin-prettier": "^3.4.0",
-    "html-webpack-plugin": "^4.5.2",
+    "html-webpack-plugin": "^4.0.0-beta.11",
     "jest": "^27.0.3",
     "mini-css-extract-plugin": "^1.6.0",
     "ora": "^5.4.0",

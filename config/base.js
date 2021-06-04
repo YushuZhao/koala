@@ -4,7 +4,6 @@ module.exports = (config, resolve) => {
       .entry('app')
       .add(resolve('src/index.js'))
       .end()
-      .set('mode', process.env.NODE_ENV)
       .output
       .path(resolve('dist'))
       .filename('bundle.[hash:6].js')

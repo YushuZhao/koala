@@ -1,4 +1,4 @@
 export default {
-  baseURL: MICRO_API_USER_BASEURL,
+  baseURL: 'https://user-api.airqualitychina.cn:9998',
   getConfigList: "/auth/getConfigList", // 查询用户配置信息
 };
