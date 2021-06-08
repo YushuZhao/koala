@@ -5,7 +5,8 @@ const Choose = ({ children }) => {
     return React.Children.map(children, (child) => {
       console.log(child);
       const props = child.props;
-      return React.cloneElement(child, props, {
+      return React.cloneElement(child, {
+        ...props,
         onChange: (v) => console.log(v),
       });
     });
