@@ -1,7 +1,14 @@
 import React from 'react';
 
+import Choose from '@/components/Choose';
+import Input from '@/components/InputComponent';
+
 const SecondPage1 = () => {
-  return <div>SecondPage1</div>;
+  return (
+    <Choose>
+      <Input />
+    </Choose>
+  );
 };
 
 export default SecondPage1;
