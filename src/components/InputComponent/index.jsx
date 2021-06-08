@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Input } from 'antd';
 
-const InputComponent = (props) => {
-  const [value, setValue] = useState('');
+const InputComponent = ({ initialValue = '', onChange }) => {
+  const [value, setValue] = useState(initialValue);
 
   useEffect(() => {
-    props.onChange && props.onChange(value)
+    onChange && onChange(value)
   }, [value]);
 
   return (
