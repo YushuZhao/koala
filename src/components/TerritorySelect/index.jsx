@@ -1,7 +1,8 @@
 import React, { useState, useEffect, memo } from 'react';
-import Select from '@/components/SelectComponent';
+import Select from '@/baseUI/SelectComponent';
+import { isFunction } from '@/utils';
 
-const TerritorySelect = (props) => {
+const TerritorySelect = memo(({ onChange }) => {
   const [value, setValue] = useState(null);
   const [data, setData] = useState([
     { id: 1, name: 1 },
@@ -23,18 +24,19 @@ const TerritorySelect = (props) => {
 
   // 约定event,之后由Choose容器统一管理
   useEffect(() => {
-    props.onChange && props.onChange(value)
+    onChange && isFunction(onChange) && onChange(value)
   }, [value]);
 
   return (
     <div>
-      { data.length && <Select data={data} onChange={setValue} />}
+      { data.length && <Select initialValue={data[0].id} data={data} onChange={setValue} />}
     </div>
   );
-}
+})
 
 TerritorySelect.defaultProps = {
-  prefix: 'select-territory'
+  prefix: 'select',
+  key: 'territory'
 };
 
 TerritorySelect.displayName = 'SelectComponent';

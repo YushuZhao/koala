@@ -19,6 +19,8 @@ config.devServer
   .compress(true)
   .historyApiFallback(true);
 
+config.devtool('cheap-module-eval-source-map');
+
 const compiler = webpack(config.toConfig());
 
 const chainDevServer = compiler.options.devServer;

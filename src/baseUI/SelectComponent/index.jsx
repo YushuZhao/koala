@@ -3,18 +3,18 @@ import { Select } from 'antd';
 
 const { Option } = Select;
 
-const SelectComponent = (props) => {
-  const [value, setValue] = useState(props.data[0].id || '');
+const SelectComponent = ({ initialValue = '', onChange, data }) => {
+  const [value, setValue] = useState(initialValue);
 
   useEffect(() => {
-    props.onChange && props.onChange(value)
+    onChange && onChange(value)
   }, [value]);
 
   return (
     <div>
-      <Select defaultValue={props.data[0].id || ''} style={{ width: 120 }} onChange={setValue}>
+      <Select defaultValue={initialValue} style={{ width: 120 }} onChange={setValue}>
         {
-          props.data.map(item => {
+          data.map(item => {
             const { name, id } = item
             return (
               <Option key={id} value={id}>{name}</Option>
