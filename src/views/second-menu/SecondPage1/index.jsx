@@ -7,7 +7,7 @@ import TerritorySelect from '@/components/TerritorySelect';
 
 const SecondPage1 = () => {
   return (
-    <Choose layout="horizontal">
+    <Choose layout="horizontal" isSearch={true} >
       <Input />
       <TerritorySelect />
       <Button />

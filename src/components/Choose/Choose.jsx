@@ -2,9 +2,16 @@ import React, { useState, useEffect, memo, useCallback } from 'react';
 
 import './style.css';
 
-const coverageHandlers = (fn, config) => {
+/**
+ * 覆盖子组件的相应event
+ * @param {*} fn 
+ * @param {*} config 对象,包含所有查询条件的键值
+ * @param {*} isSearch 是否有查询按钮
+ * @returns 返回所有子组件
+ */
+const coverageHandlers = (fn, config, isSearch) => {
   return (child) => {
-    console.log(child);
+    // console.log(child);
     const { props } = child;
     const { prefix, key } = props;
     let event = {};
@@ -14,7 +21,7 @@ const coverageHandlers = (fn, config) => {
       case 'select':
         event.onChange = (v) => {
           config[`${key}-${prefix}`] = v;
-          fn({ ...config });
+          !isSearch && fn({ ...config });
         };
         break;
       case 'button':
@@ -31,8 +38,7 @@ const coverageHandlers = (fn, config) => {
   };
 };
 
-const Choose = memo(({ children, layout = 'horizontal', style, ...props }) => {
-  console.log(props);
+const Choose = memo(({ children, layout = 'horizontal', style, isSearch = false, ...props }) => {
   const [data, setData] = useState({});
 
   const config = {};
@@ -42,12 +48,11 @@ const Choose = memo(({ children, layout = 'horizontal', style, ...props }) => {
   }, [data]);
 
   const renderChildren = useCallback(() => {
-    return React.Children.map(children, coverageHandlers(setData, config));
+    return React.Children.map(children, coverageHandlers(setData, config, isSearch));
   }, [children]);
 
   return (
     <div className={`choose-container ${layout}`} style={style}>
-      {' '}
       {renderChildren()}
     </div>
   );
