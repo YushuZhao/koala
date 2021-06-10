@@ -5,7 +5,7 @@ const InputComponent = ({ initialValue = '', onChange }) => {
   const [value, setValue] = useState(initialValue);
 
   useEffect(() => {
-    onChange && onChange(value)
+    onChange && onChange(value);
   }, [value]);
 
   return (
@@ -20,6 +20,6 @@ const InputComponent = ({ initialValue = '', onChange }) => {
   );
 };
 
-InputComponent.defaultProps = { prefix: 'input' };
+InputComponent.defaultProps = { prefix: 'input', key: 'default' };
 
 export default InputComponent;

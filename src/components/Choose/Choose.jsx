@@ -3,39 +3,42 @@ import React, { useState, useEffect, memo, useCallback } from 'react';
 import './style.css';
 
 const coverageHandlers = (fn, config) => {
-  return child => {
+  return (child) => {
     console.log(child);
     const { props } = child;
     const { prefix, key } = props;
     let event = {};
 
     switch (prefix) {
-      case 'input': case 'select':
-        event.onChange = v => {
+      case 'input':
+      case 'select':
+        event.onChange = (v) => {
           config[`${key}-${prefix}`] = v;
           fn({ ...config });
-
         };
         break;
       case 'button':
-        event.onClick = v => console.log(v)
+        event.onClick = () => {
+          fn({ ...config });
+        };
         break;
     }
 
     return React.cloneElement(child, {
       ...props,
-      ...event
+      ...event,
     });
-  }
-}
+  };
+};
 
-const Choose = memo(({ children, props }) => {
+const Choose = memo(({ children, layout = 'horizontal', style, ...props }) => {
+  console.log(props);
   const [data, setData] = useState({});
 
   const config = {};
 
   useEffect(() => {
-    console.log(data)
+    console.log(data);
   }, [data]);
 
   const renderChildren = useCallback(() => {
@@ -43,7 +46,10 @@ const Choose = memo(({ children, props }) => {
   }, [children]);
 
   return (
-    <div className='choose-container horizontal' > {renderChildren()}</div>
+    <div className={`choose-container ${layout}`} style={style}>
+      {' '}
+      {renderChildren()}
+    </div>
   );
 });
 

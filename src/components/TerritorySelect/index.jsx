@@ -2,41 +2,44 @@ import React, { useState, useEffect, memo } from 'react';
 import Select from '@/baseUI/SelectComponent';
 import { isFunction } from '@/utils';
 
-const TerritorySelect = memo(({ onChange }) => {
+const TerritorySelect = memo(({ onChange, label = '', style }) => {
   const [value, setValue] = useState(null);
-  const [data, setData] = useState([
-    { id: 1, name: 1 },
-    { id: 2, name: 2 },
-    { id: 3, name: 3 }
-  ]);
+  const [data, setData] = useState([]);
 
   // 异步请求接口,获取属地数据,渲染下拉列表
-  // useEffect(() => {
-  //   setTimeout(() => {
-  // const list = [
-  //   { id: 1, name: 1 },
-  //   { id: 2, name: 2 },
-  //   { id: 3, name: 3 }
-  // ]
-  //     setData(list);
-  //   })
-  // }, [])
+  useEffect(() => {
+    setTimeout(() => {
+      const list = [
+        { id: 1, name: '海淀区' },
+        { id: 2, name: '丰台区' },
+        { id: 3, name: '朝阳区' },
+      ];
+      setData(list);
+    });
+  }, []);
 
   // 约定event,之后由Choose容器统一管理
   useEffect(() => {
-    onChange && isFunction(onChange) && onChange(value)
+    onChange && isFunction(onChange) && onChange(value);
   }, [value]);
 
   return (
-    <div>
-      { data.length && <Select initialValue={data[0].id} data={data} onChange={setValue} />}
+    <div style={style}>
+      <div style={{ display: 'inline-block' }}>
+        {label && <span>{`${label}: `}</span>}
+      </div>
+      <div style={{ display: 'inline-block' }}>
+        {data.length && (
+          <Select initialValue={data[0].id} data={data} onChange={setValue} />
+        )}
+      </div>
     </div>
   );
-})
+});
 
 TerritorySelect.defaultProps = {
   prefix: 'select',
-  key: 'territory'
+  key: 'territory',
 };
 
 TerritorySelect.displayName = 'SelectComponent';

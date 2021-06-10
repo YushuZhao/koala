@@ -6,9 +6,9 @@ import TerritorySelect from '@/components/TerritorySelect';
 
 const ThirdPage1 = () => {
   return (
-    <Choose>
+    <Choose layout="vertical">
       <Input />
-      <TerritorySelect />
+      <TerritorySelect label="属地" />
     </Choose>
   );
 };

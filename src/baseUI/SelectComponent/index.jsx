@@ -7,28 +7,25 @@ const SelectComponent = ({ initialValue = '', onChange, data }) => {
   const [value, setValue] = useState(initialValue);
 
   useEffect(() => {
-    onChange && onChange(value)
+    onChange && onChange(value);
   }, [value]);
 
   return (
-    <div>
-      <Select defaultValue={initialValue} style={{ width: 120 }} onChange={setValue}>
-        {
-          data.map(item => {
-            const { name, id } = item
-            return (
-              <Option key={id} value={id}>{name}</Option>
-            )
-          })
-        }
-      </Select>
-    </div>
+    <Select defaultValue={initialValue} onChange={setValue}>
+      {data.map((item) => {
+        const { name, id } = item;
+        return (
+          <Option key={id} value={id}>
+            {name}
+          </Option>
+        );
+      })}
+    </Select>
   );
-}
+};
 
 SelectComponent.defaultProps = {
-  prefix: 'select'
-
+  prefix: 'select',
 };
 
 export default SelectComponent;
