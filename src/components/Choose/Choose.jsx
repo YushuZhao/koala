@@ -1,5 +1,7 @@
 import React, { useState, useEffect, memo, useCallback } from 'react';
 
+import './style.css';
+
 const coverageHandlers = (fn, config) => {
   return child => {
     console.log(child);
@@ -29,6 +31,7 @@ const coverageHandlers = (fn, config) => {
 
 const Choose = memo(({ children, props }) => {
   const [data, setData] = useState({});
+
   const config = {};
 
   useEffect(() => {
@@ -39,7 +42,9 @@ const Choose = memo(({ children, props }) => {
     return React.Children.map(children, coverageHandlers(setData, config));
   }, [children]);
 
-  return <div>{renderChildren()}</div>;
+  return (
+    <div className='choose-container horizontal' > {renderChildren()}</div>
+  );
 });
 
 export default Choose;
