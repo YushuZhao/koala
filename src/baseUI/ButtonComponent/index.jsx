@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from 'antd';
 
 const ButtonComponent = ({ onClick }) => {
-  const handleClick = (e) => {
+  const handleClick = () => {
     onClick && onClick();
   };
 
@@ -15,9 +15,6 @@ const ButtonComponent = ({ onClick }) => {
   );
 };
 
-ButtonComponent.defaultProps = {
-  prefix: 'button',
-  key: 'default',
-};
+ButtonComponent.defaultProps = { prefix: 'button', key: 'default' };
 
 export default ButtonComponent;

@@ -2,6 +2,10 @@ import React, { useState, useEffect, memo, useCallback } from 'react';
 
 import './style.css';
 
+// const handlers = {
+//   'button': 
+// }
+
 /**
  * 覆盖子组件的相应event
  * @param {*} fn 
@@ -13,14 +17,16 @@ const coverageHandlers = (fn, config, isSearch) => {
   return (child) => {
     // console.log(child);
     const { props } = child;
-    const { prefix, key } = props;
+    const { prefix, key, name } = props;
+    const configKey = name || `${key}-${prefix}`;
     let event = {};
 
     switch (prefix) {
       case 'input':
       case 'select':
+      case 'radio':
         event.onChange = (v) => {
-          config[`${key}-${prefix}`] = v;
+          config[configKey] = v;
           !isSearch && fn({ ...config });
         };
         break;
@@ -48,7 +54,7 @@ const Choose = memo(({ children, layout = 'horizontal', style, isSearch = false,
   }, [data]);
 
   const renderChildren = useCallback(() => {
-    return React.Children.map(children, coverageHandlers(setData, config, isSearch));
+    return React.Children.map(children, coverageHandlers(setData, config, isSearch, name));
   }, [children]);
 
   return (
