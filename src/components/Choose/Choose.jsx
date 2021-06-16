@@ -19,6 +19,7 @@ const coverageHandlers = (choose, config, isSearch) => {
     const { prefix, key, name } = props;
     const configKey = name || `${key}-${prefix}`;
     let event = {};
+    // let config = choose.getAllConfig();
 
     switch (prefix) {
       case 'input':
@@ -40,17 +41,17 @@ const coverageHandlers = (choose, config, isSearch) => {
     return React.cloneElement(child, {
       ...props,
       ...event,
+      isSearch
     });
   };
 };
 
 const Choose = memo(props => {
   const { children, layout = 'horizontal', style, isSearch = false, choose } = props;
-
-  const config = {};
+  let config = {}
 
   const renderChildren = useCallback(() => {
-    return React.Children.map(children, coverageHandlers(choose, config, isSearch, name));
+    return React.Children.map(children, coverageHandlers(choose, config, isSearch));
   }, [children]);
 
   return (

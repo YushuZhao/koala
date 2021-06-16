@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { memo, useEffect } from 'react';
 import { Button } from 'antd';
 
-const ButtonComponent = ({ onClick }) => {
+const ButtonComponent = memo(({ onClick, isSearch }) => {
   const handleClick = () => {
     onClick && onClick();
   };
+
+  // useEffect(() => {
+  //   isSearch && handleClick();
+  // }, [isSearch]);
 
   return (
     <div>
@@ -13,7 +17,7 @@ const ButtonComponent = ({ onClick }) => {
       </Button>
     </div>
   );
-};
+});
 
 ButtonComponent.defaultProps = { prefix: 'button', key: 'default' };
 
