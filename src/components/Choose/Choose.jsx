@@ -1,4 +1,4 @@
-import React, { useState, useEffect, memo, useCallback } from 'react';
+import React, { memo, useCallback } from 'react';
 
 import './style.css';
 
@@ -8,14 +8,13 @@ import './style.css';
 
 /**
  * 覆盖子组件的相应event
- * @param {*} fn 
+ * @param {*} choose useChoose中各种方法
  * @param {*} config 对象,包含所有查询条件的键值
  * @param {*} isSearch 是否有查询按钮
  * @returns 返回所有子组件
  */
-const coverageHandlers = (fn, config, isSearch) => {
+const coverageHandlers = (choose, config, isSearch) => {
   return (child) => {
-    // console.log(child);
     const { props } = child;
     const { prefix, key, name } = props;
     const configKey = name || `${key}-${prefix}`;
@@ -25,14 +24,15 @@ const coverageHandlers = (fn, config, isSearch) => {
       case 'input':
       case 'select':
       case 'radio':
+      case 'cascader':
         event.onChange = (v) => {
           config[configKey] = v;
-          !isSearch && fn({ ...config });
+          !isSearch && choose.setConfig(configKey, v);
         };
         break;
       case 'button':
         event.onClick = () => {
-          fn({ ...config });
+          choose.setAllConfig({ ...config });
         };
         break;
     }
@@ -44,17 +44,13 @@ const coverageHandlers = (fn, config, isSearch) => {
   };
 };
 
-const Choose = memo(({ children, layout = 'horizontal', style, isSearch = false, ...props }) => {
-  const [data, setData] = useState({});
+const Choose = memo(props => {
+  const { children, layout = 'horizontal', style, isSearch = false, choose } = props;
 
   const config = {};
 
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
-
   const renderChildren = useCallback(() => {
-    return React.Children.map(children, coverageHandlers(setData, config, isSearch, name));
+    return React.Children.map(children, coverageHandlers(choose, config, isSearch, name));
   }, [children]);
 
   return (
