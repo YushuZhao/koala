@@ -8,8 +8,8 @@ import useChoose from '@/hooks/useChoose';
 
 const ThirdPage1 = () => {
   const initialConfig = {
-    "default-input": '',
-    "territory-select": 1,
+    // "default-input": '',
+    // "territory-select": 1,
   }
   const choose = useChoose(initialConfig);
 
@@ -21,7 +21,7 @@ const ThirdPage1 = () => {
     <Choose choose={choose} layout="vertical">
       <Input name="default-input" />
       <TerritorySelect name="territory-select" label='属地' />
-      {/* <FiveViews /> */}
+      <FiveViews />
     </Choose>
   );
 };

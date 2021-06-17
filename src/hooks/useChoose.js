@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 
-export default (initialValue = {}, isSearch = false) => {
+export default (initialValue = {}) => {
   const [data, setData] = useState(initialValue);
 
   const choose = useMemo(() => {
