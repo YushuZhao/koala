@@ -13,10 +13,10 @@ import './style.css';
  * @param {*} isSearch 是否有查询按钮
  * @returns 返回所有子组件
  */
-const coverageHandlers = (choose, isSearch) => {
+const coverageHandlers = (choose, isSearch, initialConfig) => {
   return (child) => {
     const { props } = child;
-    const { prefix, key, name } = props;
+    const { prefix, key, name, htmlType } = props;
     const configKey = name || `${key}-${prefix}`;
     let event = {};
     let config = choose.getAllConfig();
@@ -33,7 +33,11 @@ const coverageHandlers = (choose, isSearch) => {
         break;
       case 'button':
         event.onClick = () => {
-          choose.setAllConfig({ ...config });
+          if (htmlType === 'reset') {
+            choose.resetAllConfig({ ...initialConfig });
+          } else {
+            choose.setAllConfig({ ...config });
+          }
         };
         break;
     }
@@ -48,10 +52,9 @@ const coverageHandlers = (choose, isSearch) => {
 };
 
 const Choose = memo(props => {
-  const { children, layout = 'horizontal', style, isSearch = false, choose } = props;
-
+  const { children, layout = 'horizontal', style, isSearch = false, choose, initialConfig } = props;
   const renderChildren = useCallback(() => {
-    return React.Children.map(children, coverageHandlers(choose, isSearch));
+    return React.Children.map(children, coverageHandlers(choose, isSearch, initialConfig));
   }, [children]);
 
   return (

@@ -9,12 +9,15 @@ import FiveViews from '@/components/FiveViews';
 import useChoose from '@/hooks/useChoose';
 
 const SecondPage1 = () => {
-  const initialConfig = {
-    // "default-input": '',
-    // "territory-select": 1,
-    // "timeType-radio": 1,
-  };
-  const choose = useChoose(initialConfig);
+  const [initialConfig, setInitialConfig] = useState({});
+  const [isFirst, setIsFirst] = useState(true);
+
+  // const initialConfig = {
+  //   "default-input": '',
+  //   "territory-select": 1,
+  //   "timeType-radio": 1,
+  // };
+  const choose = useChoose({});
   const data = [
     { id: 1, name: '时' },
     { id: 2, name: '日' },
@@ -22,16 +25,24 @@ const SecondPage1 = () => {
   ]
 
   useEffect(() => {
-    console.log(choose.getAllConfig());
+    const tmpConfig = choose.getAllConfig();
+    if (!Object.values(tmpConfig).includes(undefined)) {
+      if (isFirst) {
+        setInitialConfig({ ...tmpConfig });
+        setIsFirst(false);
+      }
+      console.log(tmpConfig);
+    }
   }, [choose.getAllConfig()])
 
   return (
-    <Choose choose={choose} layout="horizontal" isSearch={true} >
+    <Choose initialConfig={initialConfig} choose={choose} layout="horizontal" isSearch={true}>
       <Input name="default-input" />
       <TerritorySelect name="territory-select" />
       <TimeTypeRadio data={data} name="timeType-radio" />
       <FiveViews name="fiveViews" />
-      <Button name="default-button" />
+      <Button name="search-button" text="查询" htmlType="submit" />
+      <Button name="reset-button" text="重置" htmlType="reset" />
     </Choose>
   );
 };

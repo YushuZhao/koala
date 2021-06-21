@@ -1,7 +1,7 @@
 import React, { memo, useEffect } from 'react';
 import { Button } from 'antd';
 
-const ButtonComponent = memo(({ onClick, isSearch }) => {
+const ButtonComponent = memo(({ onClick, text, isSearch }) => {
   const handleClick = () => {
     onClick && onClick();
   };
@@ -13,7 +13,7 @@ const ButtonComponent = memo(({ onClick, isSearch }) => {
   return (
     <div>
       <Button type="primary" onClick={handleClick}>
-        查询
+        {text}
       </Button>
     </div>
   );

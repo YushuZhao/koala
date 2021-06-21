@@ -22,6 +22,10 @@ export default (initialValue = {}) => {
           ...config
         })
       },
+
+      resetAllConfig: (config) => {
+        setData({ ...config })
+      }
     }
   }, [data]);
 
