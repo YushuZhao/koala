@@ -1,9 +1,10 @@
 import React, { memo, useCallback } from 'react';
+import PubSub from 'pubsub-js';
 
 import './style.css';
 
 // const handlers = {
-//   'button': 
+//   'button':
 // }
 
 /**
@@ -34,6 +35,7 @@ const coverageHandlers = (choose, isSearch, initialConfig) => {
       case 'button':
         event.onClick = () => {
           if (htmlType === 'reset') {
+            PubSub.publish('RESET', { ...initialConfig });
             choose.resetAllConfig({ ...initialConfig });
           } else {
             choose.setAllConfig({ ...config });
@@ -46,15 +48,25 @@ const coverageHandlers = (choose, isSearch, initialConfig) => {
       ...props,
       ...event,
       isSearch,
-      choose
+      choose,
     });
   };
 };
 
-const Choose = memo(props => {
-  const { children, layout = 'horizontal', style, isSearch = false, choose, initialConfig } = props;
+const Choose = memo((props) => {
+  const {
+    children,
+    layout = 'horizontal',
+    style,
+    isSearch = false,
+    choose,
+    initialConfig,
+  } = props;
   const renderChildren = useCallback(() => {
-    return React.Children.map(children, coverageHandlers(choose, isSearch, initialConfig));
+    return React.Children.map(
+      children,
+      coverageHandlers(choose, isSearch, initialConfig)
+    );
   }, [children]);
 
   return (

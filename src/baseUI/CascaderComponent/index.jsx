@@ -10,7 +10,7 @@ const CascaderComponent = ({ initialValue = [], data, onChange }) => {
 
   const handleChange = (value, selectedOptions) => {
     setValue(value);
-  }
+  };
 
   return (
     <div>
@@ -19,18 +19,18 @@ const CascaderComponent = ({ initialValue = [], data, onChange }) => {
         value={value}
         onChange={handleChange}
         changeOnSelect
-        displayRender={label => {
+        displayRender={(label) => {
           const value = label.pop();
-          return value
+          return value;
         }}
       />
     </div>
   );
-}
+};
 
 CascaderComponent.defalutProps = {
   prefix: 'cascader',
-  key: 'default'
-}
+  key: 'default',
+};
 
 export default CascaderComponent;

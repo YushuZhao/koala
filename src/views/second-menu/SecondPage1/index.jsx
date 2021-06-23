@@ -21,8 +21,8 @@ const SecondPage1 = () => {
   const data = [
     { id: 1, name: '时' },
     { id: 2, name: '日' },
-    { id: 3, name: '周' }
-  ]
+    { id: 3, name: '周' },
+  ];
 
   useEffect(() => {
     const tmpConfig = choose.getAllConfig();
@@ -32,10 +32,15 @@ const SecondPage1 = () => {
       setIsFirst(false);
     }
     console.log(tmpConfig);
-  }, [choose.getAllConfig()])
+  }, [choose.getAllConfig()]);
 
   return (
-    <Choose initialConfig={initialConfig} choose={choose} layout="horizontal" isSearch={true}>
+    <Choose
+      initialConfig={initialConfig}
+      choose={choose}
+      layout="horizontal"
+      isSearch={true}
+    >
       <Input name="default-input" />
       <TerritorySelect name="territory-select" />
       <TimeTypeRadio data={data} name="timeType-radio" />

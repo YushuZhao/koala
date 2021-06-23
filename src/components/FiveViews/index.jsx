@@ -45,8 +45,8 @@ const FiveViews = ({ onChange }) => {
     setTimeout(() => {
       setData(options);
       setValue([options[0].value]);
-    }, 1000)
-  }, [])
+    }, 1000);
+  }, []);
 
   useEffect(() => {
     onChange && isFunction(onChange) && onChange(value);
@@ -55,11 +55,11 @@ const FiveViews = ({ onChange }) => {
   const handleChange = (value, selectedOptions) => {
     setValue(value);
     // console.log(selectedOptions)
-  }
+  };
 
   return (
     <div>
-      {data.length && value ?
+      {data.length && value ? (
         // <Cascader
         //   initialValue={[data[0].value]}
         //   data={data}
@@ -70,21 +70,21 @@ const FiveViews = ({ onChange }) => {
           value={value}
           onChange={handleChange}
           changeOnSelect
-          displayRender={label => {
+          displayRender={(label) => {
             const value = label.pop();
-            return value
+            return value;
           }}
         />
-        :
+      ) : (
         []
-      }
+      )}
     </div>
   );
-}
+};
 
 FiveViews.defaultProps = {
   prefix: 'cascader',
-  key: 'fiveViews'
-}
+  key: 'fiveViews',
+};
 
 export default FiveViews;

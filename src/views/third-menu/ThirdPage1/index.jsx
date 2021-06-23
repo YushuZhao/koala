@@ -10,17 +10,17 @@ const ThirdPage1 = () => {
   const initialConfig = {
     // "default-input": '',
     // "territory-select": 1,
-  }
+  };
   const choose = useChoose(initialConfig);
 
   useEffect(() => {
     console.log(choose.getAllConfig());
-  }, [choose.getAllConfig()])
+  }, [choose.getAllConfig()]);
 
   return (
     <Choose choose={choose} layout="vertical">
       <Input name="default-input" />
-      <TerritorySelect name="territory-select" label='属地' />
+      <TerritorySelect name="territory-select" label="属地" />
       <FiveViews />
     </Choose>
   );

@@ -10,15 +10,19 @@ const RadioComponent = ({ initialValue, onChange, data }) => {
 
   return (
     <div>
-      <Radio.Group defaultValue={initialValue} onChange={e => setValue(e.target.value)}>
-        {
-          data.map(item => <Radio.Button key={item.id} value={item.id}>{item.name}</Radio.Button>)
-        }
+      <Radio.Group
+        defaultValue={initialValue}
+        onChange={(e) => setValue(e.target.value)}
+      >
+        {data.map((item) => (
+          <Radio.Button key={item.id} value={item.id}>
+            {item.name}
+          </Radio.Button>
+        ))}
       </Radio.Group>
     </div>
   );
-}
-
+};
 
 RadioComponent.defaultProps = {
   prefix: 'radio',
