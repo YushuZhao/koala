@@ -26,13 +26,12 @@ const SecondPage1 = () => {
 
   useEffect(() => {
     const tmpConfig = choose.getAllConfig();
-    if (!Object.values(tmpConfig).includes(undefined)) {
-      if (isFirst) {
-        setInitialConfig({ ...tmpConfig });
-        setIsFirst(false);
-      }
-      console.log(tmpConfig);
+    if (!tmpConfig) return;
+    if (isFirst) {
+      setInitialConfig({ ...tmpConfig });
+      setIsFirst(false);
     }
+    console.log(tmpConfig);
   }, [choose.getAllConfig()])
 
   return (
