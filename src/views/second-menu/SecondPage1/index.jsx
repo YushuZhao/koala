@@ -42,7 +42,7 @@ const SecondPage1 = () => {
       isSearch={true}
     >
       <Input name="default-input" />
-      <TerritorySelect name="territory-select" />
+      <TerritorySelect name="territory-select" label='属地' style={{ width: 140 }} />
       <TimeTypeRadio data={data} name="timeType-radio" />
       <FiveViews name="fiveViews" />
       <Button name="search-button" text="查询" htmlType="submit" />

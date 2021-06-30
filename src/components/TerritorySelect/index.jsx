@@ -1,13 +1,10 @@
 import React, { useState, useEffect, memo } from 'react';
-import { Select } from 'antd';
-// import Select from '@/baseUI/SelectComponent';
+import Select from '@/baseUI/SelectComponent';
 import { isFunction } from '@/utils';
 import PubSub from 'pubsub-js';
 
-const { Option } = Select;
-
 const TerritorySelect = memo(
-  ({ onChange, label = '', style, name, choose, isSearch }) => {
+  ({ onChange, choose, isSearch, name, ...restProps }) => {
     const [value, setValue] = useState(undefined);
     const [data, setData] = useState([]);
 
@@ -43,38 +40,13 @@ const TerritorySelect = memo(
     }, [value]);
 
     return (
-      // <div style={style}>
-      //   <div style={{ display: 'inline-block' }}>
-      //     {label && <span>{`${label}: `}</span>}
-      //   </div>
-      //   <div style={{ display: 'inline-block', minWidth: 85 }} >
-      //     {data.length ?
-      //       <Select initialValue={data[0].id} data={data} onChange={setValue} />
-      //       :
-      //       []
-      //     }
-      //   </div>
-      // </div>
-      <div style={style}>
-        <div style={{ display: 'inline-block' }}>
-          {label && <span>{`${label}: `}</span>}
-        </div>
-        <div style={{ display: 'inline-block', minWidth: 85 }}>
-          {data.length && value ? (
-            <Select value={value} onChange={setValue}>
-              {data.map((item) => {
-                const { name, id } = item;
-                return (
-                  <Option key={id} value={id}>
-                    {name}
-                  </Option>
-                );
-              })}
-            </Select>
-          ) : (
+      <div>
+        {
+          data.length ?
+            <Select value={value} defaultValue={data[0].id} data={data} onChange={setValue} {...restProps} />
+            :
             []
-          )}
-        </div>
+        }
       </div>
     );
   }

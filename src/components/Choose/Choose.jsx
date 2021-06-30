@@ -1,4 +1,4 @@
-import React, { memo, useCallback } from 'react';
+import React, { memo, useState, useEffect, useCallback } from 'react';
 import PubSub from 'pubsub-js';
 
 import './style.css';
@@ -62,7 +62,20 @@ const Choose = memo((props) => {
     choose,
     initialConfig,
   } = props;
+
+  // const [isSearch, setIsSearch] = useState(false);
+
+  // useEffect(() => {
+  //   console.log(children)
+  //   children.map(item => {
+  //     if (item.props.htmlType && item.props.htmlType === 'submit') {
+  //       setIsSearch(true);
+  //     }
+  //   });
+  // }, [children]);
+
   const renderChildren = useCallback(() => {
+
     return React.Children.map(
       children,
       coverageHandlers(choose, isSearch, initialConfig)
