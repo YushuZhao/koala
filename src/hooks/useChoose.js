@@ -1,7 +1,15 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 
 export default (initialValue = {}) => {
   const [data, setData] = useState(initialValue);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    console.log(data)
+    if (Object.values(data).length && !Object.values(data).includes(undefined)) {
+      setMounted(true);
+    }
+  }, [data])
 
   const choose = useMemo(() => {
     return {
@@ -30,6 +38,7 @@ export default (initialValue = {}) => {
       resetAllConfig: (config) => {
         setData({ ...config });
       },
+      mounted
     };
   }, [data]);
 

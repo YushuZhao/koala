@@ -1,4 +1,4 @@
-import React, { memo, useState, useEffect, useCallback } from 'react';
+import React, { memo, useState, useEffect, useCallback, useMemo } from 'react';
 import PubSub from 'pubsub-js';
 
 import './style.css';
@@ -14,14 +14,13 @@ import './style.css';
  * @param {*} isSearch 是否有查询按钮
  * @returns 返回所有子组件
  */
-const coverageHandlers = (choose, isSearch, initialConfig) => {
+const coverageHandlers = (choose, isSearch, memoriedInitialConfig, initialConfig) => {
   return (child) => {
     const { props } = child;
     const { prefix, key, name, htmlType } = props;
     const configKey = name || `${key}-${prefix}`;
     let event = {};
     let config = choose.getAllConfig();
-
     switch (prefix) {
       case 'input':
       case 'select':
@@ -35,8 +34,8 @@ const coverageHandlers = (choose, isSearch, initialConfig) => {
       case 'button':
         event.onClick = () => {
           if (htmlType === 'reset') {
-            PubSub.publish('RESET', { ...initialConfig });
-            choose.resetAllConfig({ ...initialConfig });
+            PubSub.publish('RESET', { ...memoriedInitialConfig });
+            choose.resetAllConfig({ ...memoriedInitialConfig });
           } else {
             choose.setAllConfig({ ...config });
           }
@@ -58,21 +57,29 @@ const Choose = memo((props) => {
     children,
     layout = 'horizontal',
     style,
-    isSearch = false,
     choose,
     initialConfig,
   } = props;
 
-  // const [isSearch, setIsSearch] = useState(false);
+  // let initialConfig = {};
+  let isSearch = false;
+  children.map(item => {
+    const { prefix, key, name, htmlType } = item.props;
+    const configKey = name || `${key}-${prefix}`;
+    if (htmlType && htmlType === 'submit') {
+      isSearch = true;
+    }
 
-  // useEffect(() => {
-  //   console.log(children)
-  //   children.map(item => {
-  //     if (item.props.htmlType && item.props.htmlType === 'submit') {
-  //       setIsSearch(true);
-  //     }
-  //   });
-  // }, [children]);
+    // if (prefix !== 'button') {
+    //   initialConfig[configKey] = undefined;
+    // }
+  });
+  // console.log(initialConfig)
+
+  // const memoriedInitialConfig = useMemo(() => {
+  //   console.log(choose.getAllConfig())
+  //   return choose.getAllConfig()
+  // }, [choose.mounted])
 
   const renderChildren = useCallback(() => {
 

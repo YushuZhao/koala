@@ -1,9 +1,9 @@
-import React, { useState, useEffect, memo } from 'react';
+import React, { useEffect } from 'react';
 import { Select } from 'antd';
 
 const { Option } = Select;
 
-const SelectComponent = ({ defaultValue = '', data, value, style, label = '', ...restProps }) => {
+const SelectComponent = ({ label = '', data, style, ...restProps }) => {
 
   return (
     <div style={style}>
@@ -11,8 +11,8 @@ const SelectComponent = ({ defaultValue = '', data, value, style, label = '', ..
         {label && <span>{`${label}: `}</span>}
       </div>
       <div className="base-select-content" style={{ display: 'inline-block' }}>
-        {data.length && value ? (
-          <Select defaultValue={defaultValue} value={value} {...restProps}>
+        {data.length ? (
+          <Select {...restProps}>
             {data.map((item) => {
               const { name, id } = item;
               return (

@@ -4,7 +4,7 @@ import { isFunction } from '@/utils';
 import PubSub from 'pubsub-js';
 
 const TerritorySelect = memo(
-  ({ onChange, choose, isSearch, name, ...restProps }) => {
+  ({ choose, isSearch, name, onChange, ...restProps }) => {
     const [value, setValue] = useState(undefined);
     const [data, setData] = useState([]);
 
@@ -25,16 +25,16 @@ const TerritorySelect = memo(
 
     useEffect(() => {
       let handleSubscribe = (msg, values) => {
-        console.log(msg, values);
+        console.log(`${name}: ${values[name]}`)
         setValue(values[name]);
       };
       let id = PubSub.subscribe('RESET', handleSubscribe);
       return () => {
         PubSub.unsubscribe(id);
       };
-    }, [data]);
+    }, []);
 
-    // 约定event,之后由Choose容器统一管理
+    // 约定event, 之后由Choose容器统一管理
     useEffect(() => {
       onChange && isFunction(onChange) && onChange(value);
     }, [value]);

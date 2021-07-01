@@ -1,14 +1,13 @@
 import React, { useState, useEffect, memo } from 'react';
-import { Radio } from 'antd';
-// import Radio from '@/baseUI/RadioComponent';
+import Radio from '@/baseUI/RadioComponent';
 import { isFunction } from '@/utils';
 
-const TimeTypeRadio = memo(({ data, onChange, name }) => {
+const TimeTypeRadio = memo(({ data, onChange, name, ...restProps }) => {
   const [value, setValue] = useState(data[0].id);
 
   useEffect(() => {
     let handleSubscribe = (msg, values) => {
-      console.log(msg, values);
+      console.log(`${name}: ${values[name]}`)
       setValue(values[name]);
     };
     let id = PubSub.subscribe('RESET', handleSubscribe);
@@ -18,18 +17,11 @@ const TimeTypeRadio = memo(({ data, onChange, name }) => {
   }, []);
 
   useEffect(() => {
-    onChange && isFunction(onChange) && onChange(value);
+    value && onChange && isFunction(onChange) && onChange(value);
   }, [value]);
 
   return (
-    // <Radio initialValue={data[0].id} data={data} onChange={setValue} />
-    <Radio.Group value={value} onChange={(e) => setValue(e.target.value)}>
-      {data.map((item) => (
-        <Radio.Button key={item.id} value={item.id}>
-          {item.name}
-        </Radio.Button>
-      ))}
-    </Radio.Group>
+    <Radio value={value} defaultValue={data[0].id} data={data} onChange={setValue} {...restProps} />
   );
 });
 
