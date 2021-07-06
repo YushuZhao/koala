@@ -3,41 +3,39 @@ import PubSub from 'pubsub-js';
 
 import './style.css';
 
-// const handlers = {
-//   'button':
-// }
-
 /**
  * 覆盖子组件的相应event
  * @param {*} choose useChoose中各种方法
- * @param {*} config 对象,包含所有查询条件的键值
  * @param {*} isSearch 是否有查询按钮
+ * @param {*} initialConfig allconfig初始值
  * @returns 返回所有子组件
  */
-const coverageHandlers = (choose, isSearch, memoriedInitialConfig, initialConfig) => {
+const coverageHandlers = (choose, isSearch, initialConfig) => {
   return (child) => {
     const { props } = child;
     const { prefix, key, name, htmlType } = props;
     const configKey = name || `${key}-${prefix}`;
     let event = {};
-    let config = choose.getAllConfig();
+    let configs = choose.getAllConfig() || {};
+    // useChoose.js: getAllConfig方法中, 若config中含有undefined的数据,则返回undefined
+
     switch (prefix) {
       case 'input':
       case 'select':
       case 'radio':
       case 'cascader':
         event.onChange = (v) => {
-          config[configKey] = v;
+          configs[configKey] = v;
           !isSearch && choose.setConfig(configKey, v);
         };
         break;
       case 'button':
         event.onClick = () => {
           if (htmlType === 'reset') {
-            PubSub.publish('RESET', { ...memoriedInitialConfig });
-            choose.resetAllConfig({ ...memoriedInitialConfig });
+            PubSub.publish('RESET', initialConfig);
+            choose.resetAllConfig(initialConfig);
           } else {
-            choose.setAllConfig({ ...config });
+            choose.setAllConfig({ ...configs });
           }
         };
         break;
@@ -53,36 +51,32 @@ const coverageHandlers = (choose, isSearch, memoriedInitialConfig, initialConfig
 };
 
 const Choose = memo((props) => {
+  console.log("Choose 运行了")
   const {
     children,
     layout = 'horizontal',
     style,
     choose,
-    initialConfig,
   } = props;
 
-  // let initialConfig = {};
   let isSearch = false;
   children.map(item => {
-    const { prefix, key, name, htmlType } = item.props;
-    const configKey = name || `${key}-${prefix}`;
+    const { htmlType } = item.props;
     if (htmlType && htmlType === 'submit') {
       isSearch = true;
     }
-
-    // if (prefix !== 'button') {
-    //   initialConfig[configKey] = undefined;
-    // }
   });
-  // console.log(initialConfig)
 
-  // const memoriedInitialConfig = useMemo(() => {
-  //   console.log(choose.getAllConfig())
-  //   return choose.getAllConfig()
-  // }, [choose.mounted])
+  const initialConfig = useMemo(() => {
+    const configs = choose.getAllConfig();
+    console.log("memoried 运行了, 初始值是")
+    console.log(configs)
+    return { ...configs }
+  }, [choose.mounted])
 
   const renderChildren = useCallback(() => {
-
+    console.log("renderChildren运行了,initialConfig是")
+    console.log(initialConfig)
     return React.Children.map(
       children,
       coverageHandlers(choose, isSearch, initialConfig)

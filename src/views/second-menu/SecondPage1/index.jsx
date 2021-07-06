@@ -11,9 +11,6 @@ import FiveViews from '@/components/FiveViews';
 import useChoose from '@/hooks/useChoose';
 
 const SecondPage1 = () => {
-  const [initialConfig, setInitialConfig] = useState({});
-  const [isFirst, setIsFirst] = useState(true);
-
   // const initialConfig = {
   //   "default-input": '',
   //   "territory-select": 1,
@@ -28,29 +25,17 @@ const SecondPage1 = () => {
 
   useEffect(() => {
     const tmpConfig = choose.getAllConfig();
+    console.log('page运行了')
     console.log(tmpConfig)
     if (!tmpConfig) return;
-    if (isFirst) {
-      setInitialConfig({ ...tmpConfig });
-      setIsFirst(false);
-    }
   }, [choose.getAllConfig()]);
 
   return (
     <Choose
-      initialConfig={initialConfig}
       choose={choose}
       layout="horizontal"
     >
       <Input name="default-input" />
-      {/* <Select name="default-select"
-        data={[
-          { id: 1, name: '海淀区' },
-          { id: 2, name: '丰台区' },
-          { id: 3, name: '朝阳区' },
-        ]}
-        defaultValue={1}
-      /> */}
       <TerritorySelect name="territory-select" label='属地' style={{ width: 140 }} />
       <TimeTypeRadio data={data} name="timeType-radio" style={{ width: 140 }} />
       <FiveViews name="fiveViews" />

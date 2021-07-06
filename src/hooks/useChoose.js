@@ -5,9 +5,12 @@ export default (initialValue = {}) => {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    console.log(data)
-    if (Object.values(data).length && !Object.values(data).includes(undefined)) {
+
+    if (!mounted && Object.values(data).length && !Object.values(data).includes(undefined)) {
       setMounted(true);
+      console.log(`useChoose运行了,mounted是 true`)
+    } else {
+      console.log(`useChoose运行了,mounted是 false`)
     }
   }, [data])
 
@@ -40,7 +43,7 @@ export default (initialValue = {}) => {
       },
       mounted
     };
-  }, [data]);
+  }, [data, mounted]);
 
   return choose;
 };

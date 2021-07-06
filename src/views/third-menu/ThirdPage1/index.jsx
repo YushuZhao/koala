@@ -15,7 +15,10 @@ const ThirdPage1 = () => {
   const choose = useChoose(initialConfig);
 
   useEffect(() => {
-    console.log(choose.getAllConfig());
+    const tmpConfig = choose.getAllConfig();
+    if (!tmpConfig) return;
+    console.log('page页面调用的config')
+    console.log(tmpConfig)
   }, [choose.getAllConfig()]);
 
   return (

@@ -1,18 +1,14 @@
-import React, { memo, useEffect } from 'react';
+import React, { memo } from 'react';
 import { Button } from 'antd';
 
-const ButtonComponent = memo(({ onClick, text, isSearch }) => {
+const ButtonComponent = memo(({ onClick, text, isSearch, ...restProps }) => {
   const handleClick = () => {
     onClick && onClick();
   };
 
-  // useEffect(() => {
-  //   isSearch && handleClick();
-  // }, [isSearch]);
-
   return (
     <div>
-      <Button type="primary" onClick={handleClick}>
+      <Button type="primary" onClick={handleClick} {...restProps}>
         {text}
       </Button>
     </div>
