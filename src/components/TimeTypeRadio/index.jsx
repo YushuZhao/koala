@@ -1,6 +1,7 @@
 import React, { useState, useEffect, memo } from 'react';
 import Radio from '@/baseUI/RadioComponent';
 import { isFunction } from '@/utils';
+import PubSub from 'pubsub-js';
 
 const TimeTypeRadio = memo(({ data, onChange, name, ...restProps }) => {
   const [value, setValue] = useState(data[0].id);

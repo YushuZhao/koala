@@ -24,6 +24,7 @@ const coverageHandlers = (choose, isSearch, initialConfig) => {
       case 'select':
       case 'radio':
       case 'cascader':
+      case 'checkbox':
         event.onChange = (v) => {
           configs[configKey] = v;
           !isSearch && choose.setConfig(configKey, v);
