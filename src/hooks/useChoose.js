@@ -26,6 +26,9 @@ export default (initialValue = {}) => {
         if (!Object.values(data).includes(undefined)) {
           return data;
         }
+        if (!mounted) {
+          return data;
+        }
       },
 
       setAllConfig: (config) => {

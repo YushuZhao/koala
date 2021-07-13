@@ -17,7 +17,7 @@ const SecondPage1 = () => {
   //   "territory-select": 1,
   //   "timeType-radio": 1,
   // };
-  const choose = useChoose({});
+  const choose = useChoose();
   const configs = choose.getAllConfig();
   const data = [
     { id: 1, name: '时' },
@@ -26,9 +26,9 @@ const SecondPage1 = () => {
   ];
 
   useEffect(() => {
-    const tmpConfig = choose.getAllConfig();
-    if (!tmpConfig) return;
-    console.log(tmpConfig)
+    if (!configs) return;
+    console.log(configs)
+
   }, [configs]);
 
   return (
@@ -36,10 +36,10 @@ const SecondPage1 = () => {
       choose={choose}
       layout="vertical"
     >
-      <Input name="default-input" />
+      {/* <Input name="default-input" /> */}
       <TerritorySelect name="territory-select" label='属地' style={{ width: 140 }} />
-      <TimeTypeRadio data={data} name="timeType-radio" style={{ width: 140 }} />
       <CheckAllBox />
+      <TimeTypeRadio data={data} name="timeType-radio" style={{ width: 140 }} />
       {/* <FiveViews name="fiveViews" /> */}
       <Button name="search-button" text="查询" htmlType="submit" />
       <Button name="reset-button" text="重置" htmlType="reset" />

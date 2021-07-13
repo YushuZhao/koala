@@ -1,4 +1,4 @@
-import React, { memo, useState, useEffect, useCallback, useMemo } from 'react';
+import React, { memo, useState, useEffect, useLayoutEffect, useCallback, useMemo } from 'react';
 import PubSub from 'pubsub-js';
 
 import './style.css';
@@ -16,8 +16,7 @@ const coverageHandlers = (choose, isSearch, initialConfig) => {
     const { prefix, key, name, htmlType } = props;
     const configKey = name || `${key}-${prefix}`;
     let event = {};
-    let configs = choose.getAllConfig() || {};
-    // useChoose.js: getAllConfig方法中, 若config中含有undefined的数据,则返回undefined
+    let configs = choose.getAllConfig();
 
     switch (prefix) {
       case 'input':
@@ -60,12 +59,26 @@ const Choose = memo((props) => {
   } = props;
 
   let isSearch = false;
+
   children.map(item => {
     const { htmlType } = item.props;
     if (htmlType && htmlType === 'submit') {
       isSearch = true;
     }
   });
+
+  useLayoutEffect(() => {
+    if (!choose.mounted) {
+      children.map(child => {
+        const { props } = child;
+        const { prefix, key, name } = props;
+        const configKey = name || `${key}-${prefix}`;
+        if (prefix !== "button") {
+          choose.setConfig(configKey, undefined);
+        }
+      });
+    }
+  }, [choose.mounted]);
 
   const initialConfig = useMemo(() => {
     const configs = choose.getAllConfig();
@@ -77,7 +90,7 @@ const Choose = memo((props) => {
       children,
       coverageHandlers(choose, isSearch, initialConfig)
     );
-  }, [children]);
+  }, [children, isSearch]);
 
   return (
     <div className={`choose-container ${layout}`} style={style}>
