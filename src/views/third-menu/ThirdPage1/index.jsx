@@ -17,8 +17,6 @@ const ThirdPage1 = () => {
   useEffect(() => {
     const tmpConfig = choose.getAllConfig();
     if (!tmpConfig) return;
-    console.log('page页面调用的config')
-    console.log(tmpConfig)
   }, [choose.getAllConfig()]);
 
   return (

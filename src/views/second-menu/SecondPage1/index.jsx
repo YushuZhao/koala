@@ -27,9 +27,8 @@ const SecondPage1 = () => {
 
   useEffect(() => {
     const tmpConfig = choose.getAllConfig();
-    console.log('page运行了')
-    console.log(tmpConfig)
     if (!tmpConfig) return;
+    console.log(tmpConfig)
   }, [configs]);
 
   return (

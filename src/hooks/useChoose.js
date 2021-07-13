@@ -8,9 +8,6 @@ export default (initialValue = {}) => {
 
     if (!mounted && Object.values(data).length && !Object.values(data).includes(undefined)) {
       setMounted(true);
-      console.log(`useChoose运行了,mounted是 true`)
-    } else {
-      console.log(`useChoose运行了,mounted是 false`)
     }
   }, [data])
 

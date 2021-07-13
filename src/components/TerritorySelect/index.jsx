@@ -25,7 +25,6 @@ const TerritorySelect = memo(
 
     useEffect(() => {
       let handleSubscribe = (msg, values) => {
-        console.log(`${name}: ${values[name]}`)
         setValue(values[name]);
       };
       let id = PubSub.subscribe('RESET', handleSubscribe);

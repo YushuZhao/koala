@@ -52,7 +52,6 @@ const coverageHandlers = (choose, isSearch, initialConfig) => {
 };
 
 const Choose = memo((props) => {
-  console.log("Choose 运行了")
   const {
     children,
     layout = 'horizontal',
@@ -70,14 +69,10 @@ const Choose = memo((props) => {
 
   const initialConfig = useMemo(() => {
     const configs = choose.getAllConfig();
-    console.log("memoried 运行了, 初始值是")
-    console.log(configs)
     return { ...configs }
   }, [choose.mounted])
 
   const renderChildren = useCallback(() => {
-    console.log("renderChildren运行了,initialConfig是")
-    console.log(initialConfig)
     return React.Children.map(
       children,
       coverageHandlers(choose, isSearch, initialConfig)
