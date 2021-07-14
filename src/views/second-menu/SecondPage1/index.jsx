@@ -9,7 +9,8 @@ import TerritorySelect from '@/components/TerritorySelect';
 import TimeTypeRadio from '@/components/TimeTypeRadio';
 // import FiveViews from '@/components/FiveViews';
 import CheckAllBox from '@/components/CheckAllBox';
-import useChoose from '@/hooks/useChoose';
+
+const { useChoose } = Choose;
 
 const SecondPage1 = () => {
   // const initialConfig = {
@@ -18,7 +19,8 @@ const SecondPage1 = () => {
   //   "timeType-radio": 1,
   // };
   const choose = useChoose();
-  const configs = choose.getAllConfig();
+  const { mounted, getAllConfig } = choose;
+  const configs = getAllConfig();
   const data = [
     { id: 1, name: '时' },
     { id: 2, name: '日' },
@@ -26,10 +28,10 @@ const SecondPage1 = () => {
   ];
 
   useEffect(() => {
-    if (!configs) return;
+    if (!mounted) return;
     console.log(configs)
 
-  }, [configs]);
+  }, [mounted, configs]);
 
   return (
     <Choose
