@@ -5,7 +5,6 @@ export default (initialValue = {}) => {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-
     if (!mounted && Object.values(data).length && !Object.values(data).includes(undefined)) {
       setMounted(true);
     }
@@ -22,14 +21,7 @@ export default (initialValue = {}) => {
         });
       },
 
-      getAllConfig: () => {
-        if (!Object.values(data).includes(undefined)) {
-          return data;
-        }
-        if (!mounted) {
-          return data;
-        }
-      },
+      getAllConfig: () => data,
 
       setAllConfig: (config) => {
         setData({
@@ -41,6 +33,7 @@ export default (initialValue = {}) => {
       resetAllConfig: (config) => {
         setData({ ...config });
       },
+      
       mounted
     };
   }, [data, mounted]);

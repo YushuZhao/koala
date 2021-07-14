@@ -58,27 +58,20 @@ const Choose = memo((props) => {
     choose,
   } = props;
 
-  let isSearch = false;
+  const isSearch = children.some(({props}) => props.htmlType && props.htmlType === 'submit');
 
-  children.map(item => {
-    const { htmlType } = item.props;
-    if (htmlType && htmlType === 'submit') {
-      isSearch = true;
-    }
-  });
-
-  useLayoutEffect(() => {
-    if (!choose.mounted) {
-      children.map(child => {
-        const { props } = child;
-        const { prefix, key, name } = props;
-        const configKey = name || `${key}-${prefix}`;
-        if (prefix !== "button") {
-          choose.setConfig(configKey, undefined);
-        }
-      });
-    }
-  }, [choose.mounted]);
+  // useLayoutEffect(() => {
+  //   if (!choose.mounted) {
+  //     children.map(child => {
+  //       const { props } = child;
+  //       const { prefix, key, name } = props;
+  //       const configKey = name || `${key}-${prefix}`;
+  //       if (prefix !== "button") {
+  //         choose.setConfig(configKey, undefined);
+  //       }
+  //     });
+  //   }
+  // }, [choose.mounted]);
 
   const initialConfig = useMemo(() => {
     const configs = choose.getAllConfig();
@@ -90,7 +83,7 @@ const Choose = memo((props) => {
       children,
       coverageHandlers(choose, isSearch, initialConfig)
     );
-  }, [children, isSearch]);
+  }, [children, choose, isSearch, initialConfig]);
 
   return (
     <div className={`choose-container ${layout}`} style={style}>
