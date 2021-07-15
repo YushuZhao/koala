@@ -30,10 +30,10 @@ export default (initialValue = {}) => {
         });
       },
 
-      resetAllConfig: (config) => {
+      resetConfig: (config) => {
         setData({ ...config });
       },
-      
+
       mounted
     };
   }, [data, mounted]);

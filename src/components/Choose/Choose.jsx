@@ -1,4 +1,4 @@
-import React, { memo, useState, useEffect, useLayoutEffect, useCallback, useMemo } from 'react';
+import React, { memo, useCallback, useMemo } from 'react';
 import PubSub from 'pubsub-js';
 
 import './style.css';
@@ -33,7 +33,7 @@ const coverageHandlers = (choose, isSearch, initialConfig) => {
         event.onClick = () => {
           if (htmlType === 'reset') {
             PubSub.publish('RESET', initialConfig);
-            choose.resetAllConfig(initialConfig);
+            choose.resetConfig(initialConfig);
           } else {
             choose.setAllConfig({ ...configs });
           }
@@ -58,20 +58,7 @@ const Choose = memo((props) => {
     choose,
   } = props;
 
-  const isSearch = children.some(({props}) => props.htmlType && props.htmlType === 'submit');
-
-  // useLayoutEffect(() => {
-  //   if (!choose.mounted) {
-  //     children.map(child => {
-  //       const { props } = child;
-  //       const { prefix, key, name } = props;
-  //       const configKey = name || `${key}-${prefix}`;
-  //       if (prefix !== "button") {
-  //         choose.setConfig(configKey, undefined);
-  //       }
-  //     });
-  //   }
-  // }, [choose.mounted]);
+  const isSearch = children.some(({ props }) => props.htmlType && props.htmlType === 'submit');
 
   const initialConfig = useMemo(() => {
     const configs = choose.getAllConfig();
