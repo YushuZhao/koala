@@ -1,16 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import CheckBox from '@/baseUI/CheckAllBoxComponent';
 
-const CheckAllBox = ({ onChange, ...restProps }) => {
+const CheckAllBox = ({
+  data,
+  defaultCheckedList,
+  onChange,
+  onCheckAllChange,
+}) => {
+  const [checkedList, setCheckedList] = useState(defaultCheckedList);
+  const [indeterminate, setIndeterminate] = useState(true);
+  const [checkAll, setCheckAll] = useState(false);
 
-  const data = ['Apple', 'Pear', 'Orange'];
-  const defaultCheckedList = ['Apple', 'Orange'];
+  const handleChange = (list) => {
+    setCheckedList(list);
+    setIndeterminate(!!list.length && list.length < data.length);
+    setCheckAll(list.length === data.length);
+  };
 
-  const [checkList, setCheckList] = useState(defaultCheckedList);
+  const handleCheckAllChange = (e) => {
+    setCheckedList(e.target.checked ? data : []);
+    setIndeterminate(false);
+    setCheckAll(e.target.checked);
+  };
 
   useEffect(() => {
     let handleSubscribe = (msg, values) => {
-      setCheckList(defaultCheckedList);
+      let list = defaultCheckedList;
+      setCheckedList(list);
+      setIndeterminate(
+        !!list.length && list.length < data.length
+      );
+      setCheckAll(list.length === data.length);
     };
     let id = PubSub.subscribe('RESET', handleSubscribe);
     return () => {
@@ -19,20 +39,27 @@ const CheckAllBox = ({ onChange, ...restProps }) => {
   }, []);
 
   useEffect(() => {
-    onChange && onChange(checkList);
-  }, [checkList]);
-
+    onChange && onChange(checkedList);
+    onCheckAllChange && onCheckAllChange(data);
+  }, [checkedList]);
 
   return (
     <div>
-      <CheckBox data={data} defaultCheckedList={defaultCheckedList} onChange={setCheckList} />
+      <CheckBox
+        data={data}
+        checkedList={checkedList}
+        indeterminate={indeterminate}
+        checkAll={checkAll}
+        onChange={handleChange}
+        onCheckAllChange={handleCheckAllChange}
+      />
     </div>
   );
-}
+};
 
 CheckAllBox.defaultProps = {
   prefix: 'checkbox',
-  key: 'pollutionSource',
-}
+  key: 'default',
+};
 
 export default CheckAllBox;

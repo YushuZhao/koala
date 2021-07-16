@@ -40,12 +40,17 @@ const TerritorySelect = memo(
 
     return (
       <div>
-        {
-          data.length ?
-            <Select value={value} defaultValue={data[0].id} data={data} onChange={setValue} {...restProps} />
-            :
-            []
-        }
+        {data.length ? (
+          <Select
+            value={value}
+            defaultValue={data[0].id}
+            data={data}
+            onChange={setValue}
+            {...restProps}
+          />
+        ) : (
+          []
+        )}
       </div>
     );
   }

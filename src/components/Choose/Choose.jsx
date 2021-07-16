@@ -23,8 +23,17 @@ const coverageHandlers = (choose, isSearch, initialConfig) => {
       case 'select':
       case 'radio':
       case 'cascader':
+        event.onChange = (v) => {
+          configs[configKey] = v;
+          !isSearch && choose.setConfig(configKey, v);
+        };
+        break;
       case 'checkbox':
         event.onChange = (v) => {
+          configs[configKey] = v;
+          !isSearch && choose.setConfig(configKey, v);
+        };
+        event.onAllChange = (v) => {
           configs[configKey] = v;
           !isSearch && choose.setConfig(configKey, v);
         };
@@ -51,19 +60,16 @@ const coverageHandlers = (choose, isSearch, initialConfig) => {
 };
 
 const Choose = memo((props) => {
-  const {
-    children,
-    layout = 'horizontal',
-    style,
-    choose,
-  } = props;
+  const { children, layout = 'horizontal', style, choose } = props;
 
-  const isSearch = children.some(({ props }) => props.htmlType && props.htmlType === 'submit');
+  const isSearch = children.some(
+    ({ props }) => props.htmlType && props.htmlType === 'submit'
+  );
 
   const initialConfig = useMemo(() => {
     const configs = choose.getAllConfig();
-    return { ...configs }
-  }, [choose.mounted])
+    return { ...configs };
+  }, [choose.mounted]);
 
   const renderChildren = useCallback(() => {
     return React.Children.map(

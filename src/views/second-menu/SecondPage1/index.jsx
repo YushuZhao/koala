@@ -27,20 +27,26 @@ const SecondPage1 = () => {
     { id: 3, name: '周' },
   ];
 
+  const checkBoxData = ['Apple', 'Pear', 'Orange'];
+  const defaultCheckedList = ['Apple', 'Orange'];
+
   useEffect(() => {
     if (!mounted) return;
-    console.log(configs)
-
+    console.log(configs);
   }, [mounted, configs]);
 
   return (
-    <Choose
-      choose={choose}
-      layout="vertical"
-    >
+    <Choose choose={choose} layout="vertical">
       {/* <Input name="default-input" /> */}
-      <TerritorySelect name="territory-select" label='属地' style={{ width: 140 }} />
-      <CheckAllBox />
+      <TerritorySelect
+        name="territory-select"
+        label="属地"
+        style={{ width: 140 }}
+      />
+      <CheckAllBox
+        data={checkBoxData}
+        defaultCheckedList={defaultCheckedList}
+      />
       <TimeTypeRadio data={data} name="timeType-radio" style={{ width: 140 }} />
       {/* <FiveViews name="fiveViews" /> */}
       <Button name="search-button" text="查询" htmlType="submit" />

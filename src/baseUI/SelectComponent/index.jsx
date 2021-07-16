@@ -4,7 +4,6 @@ import { Select } from 'antd';
 const { Option } = Select;
 
 const SelectComponent = ({ label = '', data, style, ...restProps }) => {
-
   return (
     <div style={style}>
       <div className="base-select-label" style={{ display: 'inline-block' }}>
@@ -27,7 +26,6 @@ const SelectComponent = ({ label = '', data, style, ...restProps }) => {
         )}
       </div>
     </div>
-
   );
 };
 

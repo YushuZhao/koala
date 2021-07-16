@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Radio } from 'antd';
 
 const RadioComponent = ({ defaultValue, onChange, data, ...restProps }) => {
-
   return (
     <div>
       <Radio.Group
@@ -11,7 +10,7 @@ const RadioComponent = ({ defaultValue, onChange, data, ...restProps }) => {
         {...restProps}
       >
         {data.map((item) => (
-          <Radio.Button key={item.id} value={item.id} >
+          <Radio.Button key={item.id} value={item.id}>
             {item.name}
           </Radio.Button>
         ))}

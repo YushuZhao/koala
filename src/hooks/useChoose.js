@@ -5,10 +5,14 @@ export default (initialValue = {}) => {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    if (!mounted && Object.values(data).length && !Object.values(data).includes(undefined)) {
+    if (
+      !mounted &&
+      Object.values(data).length &&
+      !Object.values(data).includes(undefined)
+    ) {
       setMounted(true);
     }
-  }, [data])
+  }, [data]);
 
   const choose = useMemo(() => {
     return {
@@ -34,7 +38,7 @@ export default (initialValue = {}) => {
         setData({ ...config });
       },
 
-      mounted
+      mounted,
     };
   }, [data, mounted]);
 

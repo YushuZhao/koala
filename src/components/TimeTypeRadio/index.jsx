@@ -8,7 +8,7 @@ const TimeTypeRadio = memo(({ data, onChange, name, ...restProps }) => {
 
   useEffect(() => {
     let handleSubscribe = (msg, values) => {
-      console.log(`${name}: ${values[name]}`)
+      console.log(`${name}: ${values[name]}`);
       setValue(values[name]);
     };
     let id = PubSub.subscribe('RESET', handleSubscribe);
@@ -22,7 +22,13 @@ const TimeTypeRadio = memo(({ data, onChange, name, ...restProps }) => {
   }, [value]);
 
   return (
-    <Radio value={value} defaultValue={data[0].id} data={data} onChange={setValue} {...restProps} />
+    <Radio
+      value={value}
+      defaultValue={data[0].id}
+      data={data}
+      onChange={setValue}
+      {...restProps}
+    />
   );
 });
 
