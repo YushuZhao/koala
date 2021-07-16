@@ -18,25 +18,21 @@ const coverageHandlers = (choose, isSearch, initialConfig) => {
     let event = {};
     let configs = choose.getAllConfig();
 
+    const handleChange = (v) => {
+      configs[configKey] = v;
+      !isSearch && choose.setConfig(configKey, v);
+    };
+
     switch (prefix) {
       case 'input':
       case 'select':
       case 'radio':
       case 'cascader':
-        event.onChange = (v) => {
-          configs[configKey] = v;
-          !isSearch && choose.setConfig(configKey, v);
-        };
+        event.onChange = handleChange;
         break;
       case 'checkbox':
-        event.onChange = (v) => {
-          configs[configKey] = v;
-          !isSearch && choose.setConfig(configKey, v);
-        };
-        event.onAllChange = (v) => {
-          configs[configKey] = v;
-          !isSearch && choose.setConfig(configKey, v);
-        };
+        event.onChange = handleChange;
+        event.onAllChange = handleChange;
         break;
       case 'button':
         event.onClick = () => {
