@@ -1,51 +1,67 @@
 import React, { useState, useEffect } from 'react';
-// import Cascader from '@/baseUI/CascaderComponent';
+import Cascader from '@/baseUI/CascaderComponent';
 import { isFunction } from '@/utils';
-import { Cascader } from 'antd';
+import PubSub from 'pubsub-js';
 
-const FiveViews = ({ onChange }) => {
-  const [value, setValue] = useState([]);
+const FiveViews = ({ choose, isSearch, name, onChange, ...restProps }) => {
+  const [value, setValue] = useState(undefined);
+  const [defaultValue, setDefaultValue] = useState(undefined);
   const [data, setData] = useState([]);
+  const options = [
+    {
+      value: 'zhejiang',
+      label: 'Zhejiang',
+      children: [
+        {
+          value: 'hangzhou',
+          label: 'Hanzhou',
+          children: [
+            {
+              value: 'xihu',
+              label: 'West Lake',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      value: 'jiangsu',
+      label: 'Jiangsu',
+      children: [
+        {
+          value: 'nanjing',
+          label: 'Nanjing',
+          children: [
+            {
+              value: 'zhonghuamen',
+              label: 'Zhong Hua Men',
+            },
+          ],
+        },
+      ],
+    },
+  ];
 
   useEffect(() => {
-    const options = [
-      {
-        value: 'zhejiang',
-        label: 'Zhejiang',
-        children: [
-          {
-            value: 'hangzhou',
-            label: 'Hanzhou',
-            children: [
-              {
-                value: 'xihu',
-                label: 'West Lake',
-              },
-            ],
-          },
-        ],
-      },
-      {
-        value: 'jiangsu',
-        label: 'Jiangsu',
-        children: [
-          {
-            value: 'nanjing',
-            label: 'Nanjing',
-            children: [
-              {
-                value: 'zhonghuamen',
-                label: 'Zhong Hua Men',
-              },
-            ],
-          },
-        ],
-      },
-    ];
+
     setTimeout(() => {
       setData(options);
       setValue([options[0].value]);
+
+      choose && isSearch && choose.setConfig(name, options[0].value);
     }, 1000);
+  }, []);
+
+  useEffect(() => {
+    let handleSubscribe = (msg, values) => {
+      console.log('----------')
+      console.log(values)
+      setValue([values[name]]);
+    };
+    let id = PubSub.subscribe('RESET', handleSubscribe);
+    return () => {
+      PubSub.unsubscribe(id);
+    };
   }, []);
 
   useEffect(() => {
@@ -54,30 +70,22 @@ const FiveViews = ({ onChange }) => {
 
   const handleChange = (value, selectedOptions) => {
     setValue(value);
-    // console.log(selectedOptions)
+    console.log(selectedOptions)
   };
 
   return (
     <div>
-      {data.length && value ? (
-        // <Cascader
-        //   initialValue={[data[0].value]}
-        //   data={data}
-        //   onChange={setValue}
-        // />
+      {data.length && value ?
         <Cascader
-          options={data}
           value={value}
+          defaultValue={[data[0].value]}
+          data={data}
           onChange={handleChange}
-          changeOnSelect
-          displayRender={(label) => {
-            const value = label.pop();
-            return value;
-          }}
+          {...restProps}
         />
-      ) : (
+        :
         []
-      )}
+      }
     </div>
   );
 };

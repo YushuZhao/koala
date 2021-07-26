@@ -8,22 +8,20 @@ import FiveViews from '@/components/FiveViews';
 import useChoose from '@/hooks/useChoose';
 
 const ThirdPage1 = () => {
-  const initialConfig = {
-    // "default-input": '',
-    // "territory-select": 1,
-  };
-  const choose = useChoose(initialConfig);
+  const choose = useChoose();
+  const { mounted, getAllConfig } = choose;
+  const configs = getAllConfig();
 
   useEffect(() => {
-    const tmpConfig = choose.getAllConfig();
-    if (!tmpConfig) return;
-  }, [choose.getAllConfig()]);
+    if (!mounted) return;
+    console.log(configs);
+  }, [mounted, configs]);
 
   return (
     <Choose choose={choose} layout="vertical">
       <Input name="default-input" />
       <TerritorySelect name="territory-select" label="属地" />
-      <FiveViews />
+      <FiveViews name="fiveViews" />
       <Button name="reset-button" text="重置" htmlType="reset" />
     </Choose>
   );

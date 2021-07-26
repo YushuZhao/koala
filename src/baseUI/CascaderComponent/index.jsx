@@ -1,28 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Cascader } from 'antd';
 
-const CascaderComponent = ({ initialValue = [], data, onChange }) => {
-  const [value, setValue] = useState(initialValue);
-
-  useEffect(() => {
-    onChange && onChange(value);
-  }, [value]);
-
-  const handleChange = (value, selectedOptions) => {
-    setValue(value);
-  };
+const CascaderComponent = ({ data, value, defaultValue, onChange }) => {
 
   return (
     <div>
       <Cascader
         options={data}
         value={value}
-        onChange={handleChange}
+        defaultValue={defaultValue}
+        onChange={onChange}
         changeOnSelect
-        displayRender={(label) => {
-          const value = label.pop();
-          return value;
-        }}
+        displayRender={(label) => label.pop()}
       />
     </div>
   );

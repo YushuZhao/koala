@@ -7,7 +7,7 @@ import Select from '@/baseUI/SelectComponent';
 import StdSelect from '@/components/StdSelect';
 import TerritorySelect from '@/components/TerritorySelect';
 import TimeTypeRadio from '@/components/TimeTypeRadio';
-// import FiveViews from '@/components/FiveViews';
+import FiveViews from '@/components/FiveViews';
 import CheckAllBox from '@/components/CheckAllBox';
 
 const { useChoose } = Choose;
@@ -48,7 +48,7 @@ const SecondPage1 = () => {
         defaultCheckedList={defaultCheckedList}
       />
       <TimeTypeRadio data={data} name="timeType-radio" style={{ width: 140 }} />
-      {/* <FiveViews name="fiveViews" /> */}
+      <FiveViews name="fiveViews" />
       <Button name="search-button" text="查询" htmlType="submit" />
       <Button name="reset-button" text="重置" htmlType="reset" />
     </Choose>
