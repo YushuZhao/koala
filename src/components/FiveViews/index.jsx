@@ -46,16 +46,14 @@ const FiveViews = ({ choose, isSearch, name, onChange, ...restProps }) => {
 
     setTimeout(() => {
       setData(options);
-      setValue([options[0].value]);
+      setValue([options[0].value]); // 级联选择value为数组
 
-      choose && isSearch && choose.setConfig(name, options[0].value);
+      choose && isSearch && choose.setConfig(name, [options[0].value]);
     }, 1000);
   }, []);
 
   useEffect(() => {
     let handleSubscribe = (msg, values) => {
-      console.log('----------')
-      console.log(values)
       setValue([values[name]]);
     };
     let id = PubSub.subscribe('RESET', handleSubscribe);
@@ -70,7 +68,7 @@ const FiveViews = ({ choose, isSearch, name, onChange, ...restProps }) => {
 
   const handleChange = (value, selectedOptions) => {
     setValue(value);
-    console.log(selectedOptions)
+    console.log(value)
   };
 
   return (
