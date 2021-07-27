@@ -5,7 +5,6 @@ import PubSub from 'pubsub-js';
 
 const FiveViews = ({ choose, isSearch, name, onChange, ...restProps }) => {
   const [value, setValue] = useState(undefined);
-  const [defaultValue, setDefaultValue] = useState(undefined);
   const [data, setData] = useState([]);
   const options = [
     {
@@ -53,7 +52,7 @@ const FiveViews = ({ choose, isSearch, name, onChange, ...restProps }) => {
   }, []);
 
   useEffect(() => {
-    let handleSubscribe = (msg, values) => {
+    let handleSubscribe = (_, values) => {
       setValue([values[name]]);
     };
     let id = PubSub.subscribe('RESET', handleSubscribe);
@@ -66,11 +65,6 @@ const FiveViews = ({ choose, isSearch, name, onChange, ...restProps }) => {
     onChange && isFunction(onChange) && onChange(value);
   }, [value]);
 
-  const handleChange = (value, selectedOptions) => {
-    setValue(value);
-    console.log(value)
-  };
-
   return (
     <div>
       {data.length && value ?
@@ -78,7 +72,7 @@ const FiveViews = ({ choose, isSearch, name, onChange, ...restProps }) => {
           value={value}
           defaultValue={[data[0].value]}
           data={data}
-          onChange={handleChange}
+          onChange={v => setValue(v)}
           {...restProps}
         />
         :

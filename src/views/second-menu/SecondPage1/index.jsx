@@ -13,11 +13,6 @@ import CheckAllBox from '@/components/CheckAllBox';
 const { useChoose } = Choose;
 
 const SecondPage1 = () => {
-  // const initialConfig = {
-  //   "default-input": '',
-  //   "territory-select": 1,
-  //   "timeType-radio": 1,
-  // };
   const choose = useChoose();
   const { mounted, getAllConfig } = choose;
   const configs = getAllConfig();
