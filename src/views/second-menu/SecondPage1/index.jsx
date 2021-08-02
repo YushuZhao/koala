@@ -44,7 +44,7 @@ const SecondPage1 = () => {
       />
       <TimeTypeRadio data={data} name="timeType-radio" style={{ width: 140 }} />
       <FiveViews name="fiveViews" />
-      <Button name="search-button" text="查询" htmlType="submit" />
+      <Button name="search-button" text="查询" htmlType="submit" onClick={() => console.log('查询按钮其余事件')} />
       <Button name="reset-button" text="重置" htmlType="reset" />
     </Choose>
   );

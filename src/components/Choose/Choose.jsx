@@ -41,6 +41,7 @@ const coverageHandlers = (choose, isSearch, initialConfig) => {
             choose.resetConfig(initialConfig);
           } else {
             choose.setAllConfig({ ...configs });
+            props.onClick && props.onClick();
           }
         };
         break;
