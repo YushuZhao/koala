@@ -59,7 +59,7 @@ const coverageHandlers = (choose, isSearch, initialConfig) => {
 const Choose = memo((props) => {
   const { children, layout = 'horizontal', style, choose } = props;
 
-  const isSearch = children.some(
+  const isSearch = React.Children.toArray(children).some(
     ({ props }) => props.htmlType && props.htmlType === 'submit'
   );
 
