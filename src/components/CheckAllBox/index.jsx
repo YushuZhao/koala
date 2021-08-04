@@ -20,7 +20,7 @@ const CheckAllBox = ({
   };
 
   const handleCheckAllChange = (e) => {
-    setCheckedList(e.target.checked ? data : []);
+    setCheckedList(e.target.checked ? data.map(item => item.value) : []);
     setIndeterminate(false);
     setCheckAll(e.target.checked);
   };
