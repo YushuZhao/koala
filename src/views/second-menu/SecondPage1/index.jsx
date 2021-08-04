@@ -22,8 +22,10 @@ const SecondPage1 = () => {
     { id: 3, name: '周' },
   ];
 
-  const checkBoxData = ['Apple', 'Pear', 'Orange'];
-  const defaultCheckedList = ['Apple', 'Orange'];
+  // const checkBoxData = ['Apple', 'Pear', 'Orange'];
+  // const defaultCheckedList = ['Apple', 'Orange'];
+  const checkBoxData = [{ value: 1, label: 'Apple' }, { value: 2, label: 'Pear' }, { value: 3, label: 'Orange' }];
+  const defaultCheckedList = [{ value: 1, label: 'Apple' }, { value: 3, label: 'Orange' }];
 
   useEffect(() => {
     if (!mounted) return;
