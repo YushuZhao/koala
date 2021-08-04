@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import CheckBox from '@/baseUI/CheckAllBoxComponent';
 
 const CheckAllBox = ({
+  label = '',
   data,
+  style,
   defaultCheckedList,
   onChange,
   onCheckAllChange,
@@ -44,15 +46,20 @@ const CheckAllBox = ({
   }, [checkedList]);
 
   return (
-    <div>
-      <CheckBox
-        data={data}
-        checkedList={checkedList}
-        indeterminate={indeterminate}
-        checkAll={checkAll}
-        onChange={handleChange}
-        onCheckAllChange={handleCheckAllChange}
-      />
+    <div style={style}>
+      <div style={{ display: 'inline-block' }}>
+        {label && <span>{`${label}: `}</span>}
+      </div>
+      <div style={{ display: 'inline-block' }}>
+        <CheckBox
+          data={data}
+          checkedList={checkedList}
+          indeterminate={indeterminate}
+          checkAll={checkAll}
+          onChange={handleChange}
+          onCheckAllChange={handleCheckAllChange}
+        />
+      </div>
     </div>
   );
 };

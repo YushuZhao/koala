@@ -39,6 +39,7 @@ const SecondPage1 = () => {
         style={{ width: 140 }}
       />
       <CheckAllBox
+        label="分类"
         data={checkBoxData}
         defaultCheckedList={defaultCheckedList}
       />
