@@ -38,7 +38,7 @@ const coverageHandlers = (choose, isSearch, initialConfig) => {
         event.onClick = () => {
           if (htmlType === 'reset') {
             PubSub.publish('RESET', initialConfig);
-            choose.resetConfig(initialConfig);
+            !isSearch && choose.resetConfig(initialConfig);
           } else {
             choose.setAllConfig({ ...configs });
             props.onClick && props.onClick();
