@@ -38,7 +38,7 @@ const CheckAllBox = ({
     return () => {
       PubSub.unsubscribe(id);
     };
-  }, []);
+  }, [defaultCheckedList]);
 
   useEffect(() => {
     onChange && onChange(checkedList);
