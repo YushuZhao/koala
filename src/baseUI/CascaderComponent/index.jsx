@@ -19,7 +19,7 @@ const CascaderComponent = ({ data, value, defaultValue, onChange }) => {
 
 CascaderComponent.defalutProps = {
   prefix: 'cascader',
-  key: 'default',
+  property: 'default',
 };
 
 export default CascaderComponent;

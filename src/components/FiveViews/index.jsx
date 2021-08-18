@@ -116,7 +116,7 @@ const FiveViews = (props) => {
 
 FiveViews.defaultProps = {
   prefix: 'cascader',
-  key: 'fiveViews',
+  property: 'fiveViews',
 };
 
 export default FiveViews;

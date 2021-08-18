@@ -58,7 +58,7 @@ const TerritorySelect = memo(
 
 TerritorySelect.defaultProps = {
   prefix: 'select',
-  key: 'territory',
+  property: 'territory',
 };
 
 TerritorySelect.displayName = 'SelectComponent';

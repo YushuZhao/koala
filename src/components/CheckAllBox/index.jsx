@@ -66,7 +66,7 @@ const CheckAllBox = ({
 
 CheckAllBox.defaultProps = {
   prefix: 'checkbox',
-  key: 'default',
+  property: 'default',
 };
 
 export default CheckAllBox;

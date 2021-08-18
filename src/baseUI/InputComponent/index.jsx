@@ -20,6 +20,6 @@ const InputComponent = ({ initialValue = '', onChange }) => {
   );
 };
 
-InputComponent.defaultProps = { prefix: 'input', key: 'default' };
+InputComponent.defaultProps = { prefix: 'input', property: 'default' };
 
 export default InputComponent;

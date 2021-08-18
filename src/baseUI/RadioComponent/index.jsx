@@ -21,6 +21,7 @@ const RadioComponent = ({ defaultValue, onChange, data, ...restProps }) => {
 
 RadioComponent.defaultProps = {
   prefix: 'radio',
+  property: 'default',
 };
 
 export default RadioComponent;

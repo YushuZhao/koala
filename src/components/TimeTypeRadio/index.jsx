@@ -33,7 +33,7 @@ const TimeTypeRadio = memo(({ data, onChange, name, ...restProps }) => {
 
 TimeTypeRadio.defaultProps = {
   prefix: 'radio',
-  key: 'timeType',
+  property: 'timeType',
 };
 
 TimeTypeRadio.displayName = 'RadioComponent';

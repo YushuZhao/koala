@@ -31,6 +31,7 @@ const SelectComponent = ({ label = '', data, style, ...restProps }) => {
 
 SelectComponent.defaultProps = {
   prefix: 'select',
+  property: 'default',
 };
 
 export default SelectComponent;

@@ -13,8 +13,8 @@ import './style.css';
 const coverageHandlers = (choose, isSearch, initialConfig) => {
   return (child) => {
     const { props } = child;
-    const { prefix, key, name, htmlType } = props;
-    const configKey = name || `${key}-${prefix}`;
+    const { prefix, property, name, htmlType } = props;
+    const configKey = name || `${property}-${prefix}`;
     let event = {};
     let configs = choose.getAllConfig();
 

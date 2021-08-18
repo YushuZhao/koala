@@ -39,7 +39,7 @@ const StdSelect = memo(({ choose, isSearch, name, onChange, ...restProps }) => {
 
 StdSelect.defaultProps = {
   prefix: 'select',
-  key: 'std',
+  property: 'std',
 };
 
 StdSelect.displayName = 'SelectComponent';
