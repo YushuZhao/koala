@@ -15,6 +15,6 @@ const ButtonComponent = memo(({ onClick, text, isSearch, ...restProps }) => {
   );
 });
 
-ButtonComponent.defaultProps = { prefix: 'button', key: 'default' };
+ButtonComponent.defaultProps = { prefix: 'button', property: 'default' };
 
 export default ButtonComponent;
