@@ -4,13 +4,7 @@ import { isFunction } from '@/utils';
 import PubSub from 'pubsub-js';
 
 const FiveViews = (props) => {
-  const {
-    choose,
-    isSearch,
-    name,
-    onChange,
-    ...restProps
-  } = props;
+  const { choose, isSearch, name, onChange, ...restProps } = props;
   const [value, setValue] = useState(undefined);
   const [selectedOption, setSelectedOption] = useState(undefined);
   const [data, setData] = useState([]);
@@ -65,7 +59,7 @@ const FiveViews = (props) => {
   }, []);
 
   useEffect(() => {
-    if (!data.length) return
+    if (!data.length) return;
     let handleSubscribe = (msg, values) => {
       setValue([data[0].value]);
       setSelectedOption(getOption(data[0]));
@@ -77,16 +71,16 @@ const FiveViews = (props) => {
   }, [data]);
 
   useEffect(() => {
-    if (!selectedOption || !Object.values(selectedOption).length) return
+    if (!selectedOption || !Object.values(selectedOption).length) return;
     onChange && isFunction(onChange) && onChange(selectedOption);
   }, [selectedOption]);
 
   const getOption = (data) => {
     return {
-      'admId': data.value,
-      'admLevel': data.level
-    }
-  }
+      admId: data.value,
+      admLevel: data.level,
+    };
+  };
 
   const handleChange = (v, selectedOptions) => {
     setValue(v);
@@ -94,11 +88,11 @@ const FiveViews = (props) => {
       const data = selectedOptions[selectedOptions.length - 1];
       setSelectedOption(getOption(data));
     }
-  }
+  };
 
   return (
     <div>
-      {data.length && value ?
+      {data.length && value ? (
         <Cascader
           options={data}
           value={value}
@@ -107,9 +101,9 @@ const FiveViews = (props) => {
           changeOnSelect
           displayRender={(label) => label.pop()}
         />
-        :
+      ) : (
         []
-      }
+      )}
     </div>
   );
 };

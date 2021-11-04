@@ -2,7 +2,6 @@ import React from 'react';
 import { Cascader } from 'antd';
 
 const CascaderComponent = ({ data, value, defaultValue, onChange }) => {
-
   return (
     <div>
       <Cascader

@@ -3,10 +3,13 @@ module.exports = (config, resolve) => {
   const chalk = require('chalk');
 
   return () => {
-    config.plugin('ProgressBarPlugin')
-      .use(ProgressBarPlugin, [{
-        format: `  build [:bar] ${chalk.green.bold(':percent')} (:elapsed seconds)`,
-        clear: false
-      }])
-  }
-}
+    config.plugin('ProgressBarPlugin').use(ProgressBarPlugin, [
+      {
+        format: `  build [:bar] ${chalk.green.bold(
+          ':percent'
+        )} (:elapsed seconds)`,
+        clear: false,
+      },
+    ]);
+  };
+};

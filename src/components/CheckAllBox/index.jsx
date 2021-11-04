@@ -20,7 +20,7 @@ const CheckAllBox = ({
   };
 
   const handleCheckAllChange = (e) => {
-    setCheckedList(e.target.checked ? data.map(item => item.value) : []);
+    setCheckedList(e.target.checked ? data.map((item) => item.value) : []);
     setIndeterminate(false);
     setCheckAll(e.target.checked);
   };
@@ -29,9 +29,7 @@ const CheckAllBox = ({
     let handleSubscribe = (msg, values) => {
       let list = defaultCheckedList;
       setCheckedList(list);
-      setIndeterminate(
-        !!list.length && list.length < data.length
-      );
+      setIndeterminate(!!list.length && list.length < data.length);
       setCheckAll(list.length === data.length);
     };
     let id = PubSub.subscribe('RESET', handleSubscribe);
