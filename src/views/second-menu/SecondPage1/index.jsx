@@ -22,10 +22,11 @@ const SecondPage1 = () => {
     { id: 3, name: '周' },
   ];
 
-  // const checkBoxData = ['Apple', 'Pear', 'Orange'];
-  // const defaultCheckedList = ['Apple', 'Orange'];
-
-  const checkBoxData = [{ value: 1, label: 'Apple' }, { value: 2, label: 'Pear' }, { value: 3, label: 'Orange' }];
+  const checkBoxData = [
+    { value: 1, label: 'Apple' },
+    { value: 2, label: 'Pear' },
+    { value: 3, label: 'Orange' },
+  ];
   const defaultCheckedList = [1, 3];
 
   useEffect(() => {
@@ -48,7 +49,12 @@ const SecondPage1 = () => {
       />
       <TimeTypeRadio data={data} name="timeType-radio" style={{ width: 140 }} />
       <FiveViews name="fiveViews" />
-      <Button name="search-button" text="查询" htmlType="submit" onClick={() => console.log('查询按钮其余事件')} />
+      <Button
+        name="search-button"
+        text="查询"
+        htmlType="submit"
+        onClick={() => console.log('查询按钮其余事件')}
+      />
       <Button name="reset-button" text="重置" htmlType="reset" />
     </Choose>
   );
