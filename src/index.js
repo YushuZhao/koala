@@ -4,6 +4,7 @@ import ReactDom from 'react-dom';
 import App from './App';
 import pkg from '../package.json';
 
+import 'antd/dist/antd.css';
 import './style/index.css';
 
 const root = document.querySelector('#root');
