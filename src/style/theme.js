@@ -6,7 +6,7 @@ export const lightTheme = {
   tableTdBorderBottom: 'rgba(255,255,255,.2)',
   tableTrEvenBg: '#e5edf5',
   tableTrOddBg: 'rgba(255,255,255,.2)',
-  TableTdHover: '#e6f7ff'
+  TableTdHover: '#e6f7ff',
 };
 
 export const darkTheme = {
@@ -17,5 +17,5 @@ export const darkTheme = {
   tableTdBorderBottom: 'rgba(0,0,0,.2)',
   tableTrEvenBg: '#011121',
   tableTrOddBg: '#00182f',
-  TableTdHover: '#4d5e6e'
+  TableTdHover: '#4d5e6e',
 };

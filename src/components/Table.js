@@ -2,8 +2,9 @@ import styled from 'styled-components';
 import { Table } from 'antd';
 
 export default styled(Table)`
-  .ant-table, .ant-table-small{
-    .ant-table-container{
+  .ant-table,
+  .ant-table-small {
+    .ant-table-container {
       .ant-table-thead {
         border-top: 1px solid transparent;
 
@@ -23,7 +24,7 @@ export default styled(Table)`
       .ant-table-tbody {
         > tr {
           > td {
-            color: ${({ theme }) => theme.color};;
+            color: ${({ theme }) => theme.color};
             border-bottom: 1px solid ${({ theme }) => theme.tableTdBorderBottom};
             padding: 8px 8px; //列表行间距
           }
