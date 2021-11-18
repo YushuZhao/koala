@@ -1,6 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+// const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const webpack = require('webpack');
 
 const envConfig = require('../lib').getEnv();
@@ -37,7 +37,7 @@ module.exports = {
     ],
   },
   plugins: [
-    new CleanWebpackPlugin(),
+    // new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: './public/index.html',
       filename: 'index.html', // 打包后的文件名
@@ -56,6 +56,7 @@ module.exports = {
     alias: {
       views: path.resolve(__dirname, '../src/views'),
       api: path.resolve(__dirname, '../src/api'),
+      '@': path.resolve(__dirname, '../src')
     },
   },
 };
