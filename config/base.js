@@ -6,8 +6,8 @@ module.exports = (config, resolve) => {
       .end()
       .set('mode', process.env.NODE_ENV)
       .output.path(resolve('dist'))
-      .filename('bundle.[hash:6].js')
+      .filename('[name].[contenthash:6].js')
       .publicPath('/');
-    config.devtool('cheap-module-eval-source-map');
+    config.devtool('eval-source-map');
   };
 };

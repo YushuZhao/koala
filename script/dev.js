@@ -7,15 +7,9 @@ const port = 7777;
 const publicPath = '/';
 
 config.devServer
-  .quiet(true)
   .hot(true)
   .open(true)
   .https(false)
-  .disableHostCheck(true)
-  .inline(true)
-  .stats('errors-only')
-  .overlay(false)
-  .clientLogLevel('silent')
   .compress(true)
   .historyApiFallback(true);
 

@@ -4,8 +4,8 @@ module.exports = (config, resolve) => {
   return () => {
     config.plugin('mini-css-extract').use(MiniCssExtractPlugin, [
       {
-        filename: '[hash:6].[name].css?v=[hash]',
-        chunkFilename: '[hash:6].[id].css?v=[hash]',
+        filename: '[contenthash:6].[name].css?v=[contenthash]',
+        chunkFilename: '[contenthash:6].[id].css?v=[contenthash]',
         ignoreOrder: false,
         linkType: 'text/css',
       },
