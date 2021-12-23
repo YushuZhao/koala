@@ -12,7 +12,7 @@ const App = () => {
       {renderRoutes(routes)}
       {!isLogin && <Redirect to="/login" />}
     </Router>
-  )
+  );
 };
 
 export default App;

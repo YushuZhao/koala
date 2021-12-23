@@ -14,6 +14,6 @@ ReactDom.render(
   </StrictMode>,
   root,
   () => {
-    console.log(`Project ${pkg.name} is running...`)
+    console.log(`Project ${pkg.name} is running...`);
   }
 );

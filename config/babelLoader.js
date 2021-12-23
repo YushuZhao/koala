@@ -10,9 +10,7 @@ module.exports = (config, resolve) => {
   )).version;
 
   return () => {
-    baseRule
-      .use('babel')
-      .loader(require.resolve('babel-loader'))
-      // .options(babelConf({ version }));
+    baseRule.use('babel').loader(require.resolve('babel-loader'));
+    // .options(babelConf({ version }));
   };
 };
