@@ -10,7 +10,7 @@ const App = () => {
   return (
     <Router>
       {renderRoutes(routes)}
-      {!isLogin && <Redirect to="/login" />}
+      {/* {!isLogin && <Redirect to="/login" />} */}
     </Router>
   )
 };
