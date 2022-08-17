@@ -5,14 +5,14 @@ import { renderRoutes } from 'react-router-config';
 import routes from './routes';
 
 const App = () => {
-  const isLogin = JSON.parse(localStorage.getItem('isLogin'));
+  // const isLogin = JSON.parse(localStorage.getItem('isLogin'));
 
   return (
     <Router>
       {renderRoutes(routes)}
-      {!isLogin && <Redirect to="/login" />}
+      {/* {!isLogin && <Redirect to="/login" />} */}
     </Router>
-  )
+  );
 };
 
 export default App;
